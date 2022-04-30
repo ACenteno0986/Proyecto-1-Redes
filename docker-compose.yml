@@ -1,0 +1,36 @@
+version: '3.4'
+
+networks:
+  lan1:
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24 
+           
+services:
+
+  nginx_proxy:
+    image: ubuntu/nginx 
+    networks:
+      lan1:
+          ipv4_address: 10.0.0.20  
+
+  web1:
+    image: httpd:latest
+    networks:
+      lan1:
+          ipv4_address: 10.0.0.21  
+
+  web2:
+    image: tomcat:latest
+    networks:
+      lan1:
+          ipv4_address: 10.0.0.22
+
+  dns:
+    build: ./dns
+    tty: true
+    volumes:
+      - ~/dns/conf:/etc/bind 
+    networks:
+      lan1:
+          ipv4_address: 10.0.0.3

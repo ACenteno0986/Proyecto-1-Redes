@@ -1,0 +1,9 @@
+zone "web.lan1.io" {
+    type master;
+    file "/etc/bind/zones/db.web.lan1.io"; # zone file path
+};
+
+zone "web.lan2.io" {
+    type master;
+    file "/etc/bind/zones/db.web.lan2.io"; # zone file path
+};
